@@ -14,26 +14,25 @@
 Manage services in `/etc/inetd.conf` with `chsubserver` on AIX, protect `chsubserver` from running unnecessarily by protecting with `grep`
 
 ## Usage
+The `title` specifies the inetd service and the protocol, delimited by `->`.  The puppet code will translate the supplied `title` into the correct `chsubserver` invocation.
 
 # Disabling inetd services
 
 ```puppet
-chsubserver { "rusersd":
-  proto  => "udp",
+chsubserver { "rusersd->udp":
   ensure => "disabled",
 }
 ```
-Disable the `rusersd` inetd subsystem.
+Disable the `rusersd` inetd subsystem for UDP.
 
 # Enabling inetd services
 
 ```puppet
-chsubserver { "rusersd":
-  proto  => "udp",
+chsubserver { "rusersd->udp":
   ensure => "enabled",
 }
 ```
-Disable the `rusersd` inetd subsystem.
+Disable the `rusersd` inetd subsystem for UDP.
 
 
 ## Reference
