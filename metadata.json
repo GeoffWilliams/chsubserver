@@ -1,0 +1,15 @@
+{
+  "name": "geoffwilliams/chsubserver",
+  "version": "0.1.0",
+  "author": "geoffwilliams",
+  "summary": "Manage /etc/inetd.conf on AIX using chsubserver and Puppet",
+  "license": "Apache-2.0",
+  "source": "https://github.com/GeoffWilliams/chsubserver",
+  "project_page": "https://github.com/GeoffWilliams/chsubserver",
+  "issues_url": "https://github.com/GeoffWilliams/chsubserver/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+
