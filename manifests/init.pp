@@ -5,9 +5,11 @@
 # @param proto key - inetd service to manage in the form service->protocol, eg
 #   echo->udp
 # @param ensure 'disabled' to disable a service or 'enabled' to enable it
+# @param refresh_service True to HUP the service after disabling otherwise false
 define chsubserver(
     String $key = $title,
     Enum['disabled', 'enabled'] $ensure = 'disabled',
+    Boolean $refresh_service = false
 ) {
   $file = "/etc/inetd.conf"
 
@@ -24,8 +26,14 @@ define chsubserver(
       $op_match = "#"
     }
 
+    if $refresh_service {
+      $_refresh_service = "-r"
+    } else {
+      $_refresh_service = ""
+    }
+
     exec { "chrctcp ${title}":
-      command => "chsubserver -r inetd -C ${file} ${_ensure} -v ${service} -p ${proto}",
+      command => "chsubserver ${refresh_service} inetd -C ${file} ${_ensure} -v ${service} -p ${proto}",
       onlyif  => "grep '^${op_match}.*${service}' < ${file}",
       path    => ["/usr/bin", "/usr/sbin"]
     }
