@@ -37,8 +37,7 @@ Enable the `rusersd` inetd subsystem for UDP.
 ### Enabling services with parameters
 
 ```puppet
-chsubserver { "ftp":
-  proto  => "udp",
+chsubserver { "ftp->tcp":
   ensure => "enabled",
   params => "ftpd -l -u077",
 }

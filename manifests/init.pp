@@ -35,7 +35,7 @@ define chsubserver(
     }
 
     exec { "chrctcp ${title}":
-      command => "chsubserver ${refresh_service} -C ${file} ${_ensure} -v ${service} -p ${proto} ${params}",
+      command => "chsubserver ${_refresh_service} -C ${file} ${_ensure} -v ${service} -p ${proto} ${params}",
       onlyif  => "grep '^${op_match}.*${service}.*${params}' < ${file}",
       path    => ["/usr/bin", "/usr/sbin"]
     }

@@ -1,10 +1,8 @@
-chsubserver { "rusersd":
-    proto  => "udp",
+chsubserver { "rusersd->udp":
     ensure => "disabled",
 }
 
-chsubserver { "ftp":
-    proto  => "udp",
+chsubserver { "ftp->tcp":
     ensure => "enabled",
     params => "ftpd -l -u077",
 }
