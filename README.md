@@ -16,7 +16,7 @@ Manage services in `/etc/inetd.conf` with `chsubserver` on AIX, protect `chsubse
 ## Usage
 The `title` specifies the inetd service and the protocol, delimited by `->`.  The puppet code will translate the supplied `title` into the correct `chsubserver` invocation.
 
-# Disabling inetd services
+### Disabling inetd services
 
 ```puppet
 chsubserver { "rusersd->udp":
@@ -25,15 +25,25 @@ chsubserver { "rusersd->udp":
 ```
 Disable the `rusersd` inetd subsystem for UDP.
 
-# Enabling inetd services
+### Enabling inetd services
 
 ```puppet
 chsubserver { "rusersd->udp":
   ensure => "enabled",
 }
 ```
-Disable the `rusersd` inetd subsystem for UDP.
+Enable the `rusersd` inetd subsystem for UDP.
 
+### Enabling services with parameters
+
+```puppet
+chsubserver { "ftp":
+  proto  => "udp",
+  ensure => "enabled",
+  params => "ftpd -l -u077",
+}
+```
+Enable the FTP service and set parameters to restrict the umask.
 
 ## Reference
 
