@@ -22,7 +22,7 @@ define chsubserver(
 
     if $ensure == "disabled" {
       $_ensure  = "-d"
-      $op_match = ""
+      $op_match = "[^#]"
     } else {
       $_ensure  = "-a"
       $op_match = "#"
