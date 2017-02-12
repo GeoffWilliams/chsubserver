@@ -1,6 +1,6 @@
 {
   "name": "geoffwilliams/chsubserver",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "geoffwilliams",
   "summary": "Manage /etc/inetd.conf on AIX using chsubserver and Puppet",
   "license": "Apache-2.0",

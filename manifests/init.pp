@@ -6,10 +6,12 @@
 #   echo->udp
 # @param ensure 'disabled' to disable a service or 'enabled' to enable it
 # @param refresh_service True to HUP the service after disabling otherwise false
+# @param params Optional parameters to add to the inetd line, eg "ftpd -l -u077"
 define chsubserver(
-    String $key = $title,
-    Enum['disabled', 'enabled'] $ensure = 'disabled',
-    Boolean $refresh_service = false
+    String                      $key              = $title,
+    Enum['disabled', 'enabled'] $ensure           = 'disabled',
+    Boolean                     $refresh_service  = true,
+    String                      $params           = '',
 ) {
   $file = "/etc/inetd.conf"
 
@@ -27,14 +29,14 @@ define chsubserver(
     }
 
     if $refresh_service {
-      $_refresh_service = "-r"
+      $_refresh_service = "-r inetd"
     } else {
       $_refresh_service = ""
     }
 
     exec { "chrctcp ${title}":
-      command => "chsubserver ${refresh_service} inetd -C ${file} ${_ensure} -v ${service} -p ${proto}",
-      onlyif  => "grep '^${op_match}.*${service}' < ${file}",
+      command => "chsubserver ${refresh_service} -C ${file} ${_ensure} -v ${service} -p ${proto} ${params}",
+      onlyif  => "grep '^${op_match}.*${service}.*${params}' < ${file}",
       path    => ["/usr/bin", "/usr/sbin"]
     }
   } else {
