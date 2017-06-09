@@ -13,7 +13,7 @@ define chsubserver(
     Boolean                     $refresh_service  = true,
     String                      $params           = '',
 ) {
-  $file = "/tmp/inetd.conf"
+  $file = "/etc/inetd.conf"
 
   if $key.match(/.+->.+/) {
     $key_split  = split($key, '->')
