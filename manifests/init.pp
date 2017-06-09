@@ -20,7 +20,7 @@ define chsubserver(
     $service    = $key_split[0]
     $proto      = $key_split[1]
 
-    $condition = "grep '^[ \t]*${service}.*${params}' < ${file}"
+    $condition = "grep '^[ \t]*${service}[ \t].*${params}' < ${file}"
 
     if $ensure == "disabled" {
       $_ensure  = "-d"
