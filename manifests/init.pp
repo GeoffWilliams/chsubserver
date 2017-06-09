@@ -13,19 +13,23 @@ define chsubserver(
     Boolean                     $refresh_service  = true,
     String                      $params           = '',
 ) {
-  $file = "/etc/inetd.conf"
+  $file = "/tmp/inetd.conf"
 
   if $key.match(/.+->.+/) {
     $key_split  = split($key, '->')
     $service    = $key_split[0]
     $proto      = $key_split[1]
 
+    $condition = "grep '^[ \t]*${service}.*${params}' < ${file}"
+
     if $ensure == "disabled" {
       $_ensure  = "-d"
-      $op_match = "[^#]"
+      $onlyif = $condition
+      $unless = undef
     } else {
       $_ensure  = "-a"
-      $op_match = "#"
+      $onlyif = undef
+      $unless = $condition
     }
 
     if $refresh_service {
@@ -36,7 +40,8 @@ define chsubserver(
 
     exec { "chrctcp ${title}":
       command => "chsubserver ${_refresh_service} -C ${file} ${_ensure} -v ${service} -p ${proto} ${params}",
-      onlyif  => "grep '^${op_match}.*${service}.*${params}' < ${file}",
+      onlyif  => $onlyif,
+      unless  => $unless,
       path    => ["/usr/bin", "/usr/sbin"]
     }
   } else {
