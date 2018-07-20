@@ -5,3 +5,5 @@ Puppetfile.lock
 .tmp
 .DS_Store
 /pkg
+.pdqtest
+.Puppetfile.pdqtest
