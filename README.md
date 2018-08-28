@@ -5,7 +5,7 @@
 
 1. [Description](#description)
 1. [Usage - Configuration options and additional functionality](#usage)
-1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+1. [Reference - An under-the-hood peek at what the module is doing and how](REFERENCE.md)
 1. [Limitations - OS compatibility, etc.](#limitations)
 1. [Development - Guide for contributing to the module](#development)
 
@@ -43,11 +43,6 @@ chsubserver { "ftp->tcp":
 }
 ```
 Enable the FTP service and set parameters to restrict the umask.
-
-## Reference
-
-### Defined types
-* `chsubserver` - manage `inetd` services using chsubserver
 
 ## Limitations
 
